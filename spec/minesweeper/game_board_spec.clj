@@ -44,7 +44,27 @@
 				{:row 1 :col 2} {:row 1 :col 1} {:row 2 :col 1}
 			}
 			(surrounding-cells {:row 2 :col 2} board))
-		)
+
+		(should= 
+			#{
+				{:row 1 :col 0} {:row 1 :col 1} {:row 2 :col 1}
+			}
+			(surrounding-cells {:row 2 :col 0} board))
+
+		(should= 
+			#{
+				{:row 0 :col 1} {:row 1 :col 1} {:row 1 :col 2}
+			}
+			(surrounding-cells {:row 0 :col 2} board))
+	)
+
+	(it "should give 5 cells for each edge cell"
+		(should= 
+			#{
+				{:row 0 :col 0} {:row 0 :col 1} {:row 1 :col 1} {:row 2 :col 0} {:row 2 :col 1}
+			}
+			(surrounding-cells {:row 1 :col 0} board))
+	)			
 )
 
 (describe "is-valid?"
