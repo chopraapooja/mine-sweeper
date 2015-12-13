@@ -8,25 +8,25 @@
 
 (describe "open-cell"
 	(it "should give bomb-signal(-1) on opening bomb cell"
-    	(should= -1 (open-cell board :row 0 :col 0)))
+    	(should= -1 (open-cell board {:row 0 :col 0} )))
 	
 	(it "should not give bomb-signal(-1) on opening not bomb cell"
-    	(should-not= -1 (open-cell board :row 0 :col 1))
-    	(should-not= -1 (open-cell board :row 0 :col 2))
-    	(should-not= -1 (open-cell board :row 1 :col 0))
-    	(should-not= -1 (open-cell board :row 1 :col 1))
-    	(should-not= -1 (open-cell board :row 1 :col 2))
-    	(should-not= -1 (open-cell board :row 2 :col 0))
-    	(should-not= -1 (open-cell board :row 2 :col 2)))
+    	(should-not= -1 (open-cell board {:row 0 :col 1} ))
+    	(should-not= -1 (open-cell board {:row 0 :col 2} ))
+    	(should-not= -1 (open-cell board {:row 1 :col 0} ))
+    	(should-not= -1 (open-cell board {:row 1 :col 1} ))
+    	(should-not= -1 (open-cell board {:row 1 :col 2} ))
+    	(should-not= -1 (open-cell board {:row 2 :col 0} ))
+    	(should-not= -1 (open-cell board {:row 2 :col 2} )))
 
 	(it "should give number of bombs surround cell"
-		(should= 1 (open-cell board :row 0 :col 1))
-    	(should= 0 (open-cell board :row 0 :col 2))
-    	(should= 2 (open-cell board :row 1 :col 0))
-    	(should= 2 (open-cell board :row 1 :col 1))
-    	(should= 1 (open-cell board :row 1 :col 2))
-    	(should= 1 (open-cell board :row 2 :col 0))
-    	(should= 1 (open-cell board :row 2 :col 2))
+		(should= 1 (open-cell board {:row 0 :col 1} ))
+    	(should= 0 (open-cell board {:row 0 :col 2} ))
+    	(should= 2 (open-cell board {:row 1 :col 0} ))
+    	(should= 2 (open-cell board {:row 1 :col 1} ))
+    	(should= 1 (open-cell board {:row 1 :col 2} ))
+    	(should= 1 (open-cell board {:row 2 :col 0} ))
+    	(should= 1 (open-cell board {:row 2 :col 2} ))
     )
 )
 
