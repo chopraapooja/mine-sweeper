@@ -20,7 +20,15 @@
     	(should-not= -1 (open-cell board :row 2 :col 2)))
 
 	(it "should give number of bombs surround cell"
-    	(should= 1 (open-cell board :row 1 :col 0))))
+		(should= 1 (open-cell board :row 0 :col 1))
+    	(should= 0 (open-cell board :row 0 :col 2))
+    	(should= 2 (open-cell board :row 1 :col 0))
+    	(should= 2 (open-cell board :row 1 :col 1))
+    	(should= 1 (open-cell board :row 1 :col 2))
+    	(should= 1 (open-cell board :row 2 :col 0))
+    	(should= 1 (open-cell board :row 2 :col 2))
+    )
+)
 
 (describe "surrounding-cells"
 	(it "should give 8 cells for center cell"
@@ -30,7 +38,8 @@
 				{:row 1 :col 0} {:row 1 :col 2} {:row 2 :col 0} 
 				{:row 2 :col 1} {:row 2 :col 2}
 			}
-			(surrounding-cells {:row 1 :col 1} board)))
+			(surrounding-cells {:row 1 :col 1} board))
+	)
 
 	(it "should give 3 cells for each corner cell"
 		(should= 
@@ -64,7 +73,7 @@
 				{:row 0 :col 0} {:row 0 :col 1} {:row 1 :col 1} {:row 2 :col 0} {:row 2 :col 1}
 			}
 			(surrounding-cells {:row 1 :col 0} board))
-	)			
+	)
 )
 
 (describe "is-valid?"
