@@ -19,7 +19,7 @@
 				{:row (inc row)		:col (inc col)} 
 		]))))
 
-(defn open-cell [board & {:keys [row col] :as cell}]
+(defn open-cell [board {:keys [row col] :as cell}]
 	(let [ cell-value (nth (nth board row) col)
 			is-bomb-partial? (partial is-bomb? board)]
 		(if (neg? cell-value)

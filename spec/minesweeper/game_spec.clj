@@ -32,8 +32,18 @@
 )
 
 (describe "open-cell"
-	(it "opens cell at given location & returns new board-view"
-		(should= [[nil 1 nil] [nil nil nil] [nil nil nil]] (:get-status (:open-cell (create board-view))))
+	(it "opens cell at given location & returns new game"
+		(should= [[-1 nil nil] [nil nil nil] [nil nil nil]] ((:get-status ((:open-cell (create board-view)) {:row 0 :col 0}))))
+		(should= [[nil 1 nil] [nil nil nil] [nil nil nil]] ((:get-status ((:open-cell (create board-view)) {:row 0 :col 1}))))
+		(should= [[nil nil 0] [nil nil nil] [nil nil nil]] ((:get-status ((:open-cell (create board-view)) {:row 0 :col 2}))))
+
+		(should= [[nil nil nil] [2 nil nil] [nil nil nil]] ((:get-status ((:open-cell (create board-view)) {:row 1 :col 0}))))
+		(should= [[nil nil nil] [nil 2 nil] [nil nil nil]] ((:get-status ((:open-cell (create board-view)) {:row 1 :col 1}))))
+		(should= [[nil nil nil] [nil nil 1] [nil nil nil]] ((:get-status ((:open-cell (create board-view)) {:row 1 :col 2}))))
+
+		(should= [[nil nil nil] [nil nil nil] [1 nil nil]] ((:get-status ((:open-cell (create board-view)) {:row 2 :col 0}))))
+		(should= [[nil nil nil] [nil nil nil] [nil -1 nil]] ((:get-status ((:open-cell (create board-view)) {:row 2 :col 1}))))
+		(should= [[nil nil nil] [nil nil nil] [nil nil 1]] ((:get-status ((:open-cell (create board-view)) {:row 2 :col 2}))))
 	)
 )
 
