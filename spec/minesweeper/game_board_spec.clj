@@ -23,9 +23,14 @@
     	(should= 1 (open-cell board :row 1 :col 0))))
 
 (describe "surrounding-cells"
-
-	(it "surrounding-cells of 8 cells for centered cell"
-		((should= 8 (surrounding-cells {:row 1 :col 1})))))
+	(it "should give 8 cells for center cell"
+		(should= 
+			[
+				{:row 0 :col 0} {:row 0 :col 1} {:row 0 :col 2} 
+				{:row 1 :col 0} {:row 1 :col 2} {:row 2 :col 0} 
+				{:row 2 :col 1} {:row 2 :col 2}
+			]
+			(surrounding-cells {:row 1 :col 1}))))
 
 
 (run-specs)
