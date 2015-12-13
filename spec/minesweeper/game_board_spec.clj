@@ -30,7 +30,28 @@
 				{:row 1 :col 0} {:row 1 :col 2} {:row 2 :col 0} 
 				{:row 2 :col 1} {:row 2 :col 2}
 			]
-			(surrounding-cells {:row 1 :col 1}))))
+			(surrounding-cells {:row 1 :col 1})))
+
+	(it "should give 3 cells for corner cell"
+		(should= 
+			[
+				{:row 0 :col 1} {:row 1 :col 0} {:row 1 :col 1}
+			]
+			(surrounding-cells {:row 0 :col 0}))))
+
+(describe "is-valid?"
+	(it "should give true for zero row & col"
+		(should= true (is-valid? {:row 0 :col 0})))
+
+	(it "should give true for +ve row & col"
+		(should= true (is-valid? {:row 1 :col 2})))
+
+	(it "should give false for -ve row & col"
+		(should= false (is-valid? {:row -1 :col -1})))
+
+	(it "should give false for -ve row or col"
+		(should= false (is-valid? {:row -1 :col 1}))
+		(should= false (is-valid? {:row 1 :col -1}))))
 
 
 (run-specs)
