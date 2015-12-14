@@ -5,20 +5,7 @@
 (describe "game"
 	(before
 		(def board-view [ [nil nil nil] [nil nil nil] [nil nil nil] ])
-		(def game (create-game board-view)))
-
-(describe "get-board"
-	(it "should give initial status of game as all cells nil"
-		(should= 
-			[[nil nil nil] [nil nil nil] [nil nil nil]] 
-			((:get-board game)))
 	)
-	(it "should give initial status of game as all cells nil"
-		(should= 
-			[[nil nil nil] [nil nil nil] [nil nil nil]] 
-			((:get-board game)))
-	)
-)
 
 (describe "open-cell"
 	(it "opens cell at given location & returns new game"
@@ -38,7 +25,7 @@
 
 	(it "should not open-cell when game is over"
 		(should= [[-1 nil nil] [nil nil nil] [nil nil nil]]
-			((:get-board ((:open-cell game) {:row 0 :col 0}))))
+			(open-cell board-view {:row 0 :col 0}))
 	)
 )
 
@@ -116,36 +103,3 @@
 		(should= false (won? [[-1 nil 0] [2 2 1] [1 nil 1]]))))
 )
 (run-specs)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

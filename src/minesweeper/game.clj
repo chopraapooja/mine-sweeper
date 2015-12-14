@@ -5,8 +5,6 @@
 	[board-view]
 	(contains? (set (flatten board-view)) -1))
 
-(defn get-board [board] board)
-
 (def ^{:private true} board [[-1 0 0]		; [-1 1 0]
 							 [0  0 0]		; [2  2 1]
 							 [0 -1 0]])		; [1 -1 1]
@@ -48,17 +46,6 @@
 	{
 		:finished? (finished? board-view)
 		:won? (won? board-view)
-	}
-)
-
-(defn create-game
-	[board-view]
-	{ :get-board (partial get-board board-view)
-	  :open-cell (partial (fn [old-board-view cell]
-	  				(if (finished? old-board-view) 
-	  					(create-game old-board-view)
-	  					(create-game (update-cell old-board-view cell (game-board/open-cell board cell))))) board-view)
-	  :get-status (partial get-status board-view)
 	}
 )
 
