@@ -61,6 +61,7 @@
 		(def game ((:open-cell game) {:row 0 :col 0}))
 		(def game-status ((:get-status game)))
 		(should= true (:finished? game-status))
+		(should= false (:won? game-status))
 	)
 
 	(it "should tell you won the game"
@@ -81,6 +82,7 @@
 		(def game ((:open-cell game) {:row 0 :col 1}))
 		(def game-status ((:get-status game)))
 		(should= false (:finished? game-status))
+		(should= false (:won? game-status))
 	)
 
 )
@@ -95,7 +97,13 @@
 
 (describe "won?"
 	(it "should give true when all safe cells are opened"
-		(should= true (won? [[nil 1 0] [2 2 1] [1 nil 1]]))))
+		(should= true (won? [[nil 1 0] [2 2 1] [1 nil 1]])))
+
+	(it "should give false when all safe cells are not opened"
+		(should= false (won? [[nil 1 0] [2 nil 1] [1 nil 1]])))
+
+	(it "should give true when all safe cells are opened"
+		(should= false (won? [[-1 nil 0] [2 2 1] [1 nil 1]]))))
 
 (run-specs)
 

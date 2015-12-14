@@ -42,8 +42,8 @@
 (defn get-status
 	[board-view]
 	{
-		:finished? true
-		:won? true
+		:finished? (or (won? board-view) (did-bomb-blast? board-view))
+		:won? (won? board-view)
 	})
 
 (defn create-game
