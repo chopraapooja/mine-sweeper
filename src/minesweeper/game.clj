@@ -39,26 +39,25 @@
 					actual-row))
 			board-view)))	
 
+(defn finished? [board-view]
+	(or (won? board-view) (did-bomb-blast? board-view))
+)
+
 (defn get-status
 	[board-view]
 	{
-		:finished? (or (won? board-view) (did-bomb-blast? board-view))
+		:finished? (finished? board-view)
 		:won? (won? board-view)
-	})
+	}
+)
 
 (defn create-game
 	[board-view]
 	{ :get-board (partial get-board board-view)
 	  :open-cell (partial (fn [old-board-view cell]
-	  				(create-game (update-cell old-board-view cell (game-board/open-cell board cell)))) board-view)
+	  				(if (finished? old-board-view) 
+	  					(create-game old-board-view)
+	  					(create-game (update-cell old-board-view cell (game-board/open-cell board cell))))) board-view)
 	  :get-status (partial get-status board-view)
 	}
-)
-
-(defn open-cell 
-	[board-view cell]
-	(let [ cell-value (game-board/open-cell board cell)
-		   updated-board (update-cell board-view cell cell-value)]
-		(create-game updated-board)
-		)
 )
