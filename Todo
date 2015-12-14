@@ -3,6 +3,7 @@ Minesweeper Backend
 2. Board Status with opened & closed cells
 3. Game Status
 4. Remove nil
+5. Better representation of board
 
 
 
