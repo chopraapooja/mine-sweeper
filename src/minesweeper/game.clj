@@ -61,3 +61,8 @@
 	  :get-status (partial get-status board-view)
 	}
 )
+
+(defn open-cell [board-view cell]
+	(if (finished? board-view)
+	  		board-view
+	  		(update-cell board-view cell (game-board/open-cell board cell))))

@@ -22,17 +22,18 @@
 
 (describe "open-cell"
 	(it "opens cell at given location & returns new game"
-		(should= [[-1 nil nil] [nil nil nil] [nil nil nil]] ((:get-board ((:open-cell game) {:row 0 :col 0}))))
-		(should= [[nil 1 nil] [nil nil nil] [nil nil nil]] ((:get-board ((:open-cell game) {:row 0 :col 1}))))
-		(should= [[nil nil 0] [nil nil nil] [nil nil nil]] ((:get-board ((:open-cell game) {:row 0 :col 2}))))
+		(let [p-open-cell (partial open-cell board-view)]
+		(should= [[-1 nil nil] [nil nil nil] [nil nil nil]] (p-open-cell {:row 0 :col 0}))
+		(should= [[nil 1 nil] [nil nil nil] [nil nil nil]] (p-open-cell {:row 0 :col 1}))
+		(should= [[nil nil 0] [nil nil nil] [nil nil nil]] (p-open-cell {:row 0 :col 2}))
 
-		(should= [[nil nil nil] [2 nil nil] [nil nil nil]] ((:get-board ((:open-cell game) {:row 1 :col 0}))))
-		(should= [[nil nil nil] [nil 2 nil] [nil nil nil]] ((:get-board ((:open-cell game) {:row 1 :col 1}))))
-		(should= [[nil nil nil] [nil nil 1] [nil nil nil]] ((:get-board ((:open-cell game) {:row 1 :col 2}))))
+		(should= [[nil nil nil] [2 nil nil] [nil nil nil]] (p-open-cell {:row 1 :col 0}))
+		(should= [[nil nil nil] [nil 2 nil] [nil nil nil]] (p-open-cell {:row 1 :col 1}))
+		(should= [[nil nil nil] [nil nil 1] [nil nil nil]] (p-open-cell {:row 1 :col 2}))
 
-		(should= [[nil nil nil] [nil nil nil] [1 nil nil]] ((:get-board ((:open-cell game) {:row 2 :col 0}))))
-		(should= [[nil nil nil] [nil nil nil] [nil -1 nil]] ((:get-board ((:open-cell game) {:row 2 :col 1}))))
-		(should= [[nil nil nil] [nil nil nil] [nil nil 1]] ((:get-board ((:open-cell game) {:row 2 :col 2}))))
+		(should= [[nil nil nil] [nil nil nil] [1 nil nil]] (p-open-cell {:row 2 :col 0}))
+		(should= [[nil nil nil] [nil nil nil] [nil -1 nil]] (p-open-cell {:row 2 :col 1}))
+		(should= [[nil nil nil] [nil nil nil] [nil nil 1]] (p-open-cell {:row 2 :col 2})))
 	)
 
 	(it "should not open-cell when game is over"
