@@ -17,13 +17,17 @@
 		(map-indexed (fn [i r] (if (= i row) (update-row r col new-value) r)) board-view))
 )
 
+
+(defn get-status [board-view] { :is-over true })
+
 (defn create [board-view]
 	{ :get-board (partial get-board board-view)
 	  :open-cell (partial (fn [old-board-view cell]
 	  				(create (update-cell old-board-view cell (game-board/open-cell board cell)))) board-view)
+	  :get-status (partial get-status board-view)
 	}
 )
 
-(defn open-cell [board-view & {:keys [row col] :as cell}]
+(defn open-cell [board-view cell]
 	(create (update-cell board-view cell (game-board/open-cell board cell) ))
 )
