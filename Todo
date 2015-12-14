@@ -6,6 +6,7 @@ Minesweeper Backend
 
 
 Test Cases
-1. The content of each cell is initially hidden.
+-1. The content of each cell is initially hidden.
 2. The revealed cell will contain a digit between 0 and 8.
 3. When all the cells that don't contain mines have been revealed, the game ends, and you win.
+4. Cannnot open cell with invalid index
