@@ -9,41 +9,41 @@
 		(should= true (map? (create board-view)))
 	)
 
-	(it "should map with get-status fn"
-		(should= true (fn? (:get-status (create board-view))))
+	(it "should map with get-board fn"
+		(should= true (fn? (:get-board (create board-view))))
 	)
 
-	(it "should map with get-status fn"
-		(should= true (fn? (:get-status (create board-view))))
+	(it "should map with get-board fn"
+		(should= true (fn? (:get-board (create board-view))))
 	)
 )
 
-(describe "get-status"
+(describe "get-board"
 	(it "should give initial status of game as all cells nil"
 		(should= 
 			[[nil nil nil] [nil nil nil] [nil nil nil]] 
-			((:get-status (create board-view))))
+			((:get-board (create board-view))))
 	)
 	(it "should give initial status of game as all cells nil"
 		(should= 
 			[[nil nil nil] [nil nil nil] [nil nil nil]] 
-			((:get-status (create board-view))))
+			((:get-board (create board-view))))
 	)
 )
 
 (describe "open-cell"
 	(it "opens cell at given location & returns new game"
-		(should= [[-1 nil nil] [nil nil nil] [nil nil nil]] ((:get-status ((:open-cell (create board-view)) {:row 0 :col 0}))))
-		(should= [[nil 1 nil] [nil nil nil] [nil nil nil]] ((:get-status ((:open-cell (create board-view)) {:row 0 :col 1}))))
-		(should= [[nil nil 0] [nil nil nil] [nil nil nil]] ((:get-status ((:open-cell (create board-view)) {:row 0 :col 2}))))
+		(should= [[-1 nil nil] [nil nil nil] [nil nil nil]] ((:get-board ((:open-cell (create board-view)) {:row 0 :col 0}))))
+		(should= [[nil 1 nil] [nil nil nil] [nil nil nil]] ((:get-board ((:open-cell (create board-view)) {:row 0 :col 1}))))
+		(should= [[nil nil 0] [nil nil nil] [nil nil nil]] ((:get-board ((:open-cell (create board-view)) {:row 0 :col 2}))))
 
-		(should= [[nil nil nil] [2 nil nil] [nil nil nil]] ((:get-status ((:open-cell (create board-view)) {:row 1 :col 0}))))
-		(should= [[nil nil nil] [nil 2 nil] [nil nil nil]] ((:get-status ((:open-cell (create board-view)) {:row 1 :col 1}))))
-		(should= [[nil nil nil] [nil nil 1] [nil nil nil]] ((:get-status ((:open-cell (create board-view)) {:row 1 :col 2}))))
+		(should= [[nil nil nil] [2 nil nil] [nil nil nil]] ((:get-board ((:open-cell (create board-view)) {:row 1 :col 0}))))
+		(should= [[nil nil nil] [nil 2 nil] [nil nil nil]] ((:get-board ((:open-cell (create board-view)) {:row 1 :col 1}))))
+		(should= [[nil nil nil] [nil nil 1] [nil nil nil]] ((:get-board ((:open-cell (create board-view)) {:row 1 :col 2}))))
 
-		(should= [[nil nil nil] [nil nil nil] [1 nil nil]] ((:get-status ((:open-cell (create board-view)) {:row 2 :col 0}))))
-		(should= [[nil nil nil] [nil nil nil] [nil -1 nil]] ((:get-status ((:open-cell (create board-view)) {:row 2 :col 1}))))
-		(should= [[nil nil nil] [nil nil nil] [nil nil 1]] ((:get-status ((:open-cell (create board-view)) {:row 2 :col 2}))))
+		(should= [[nil nil nil] [nil nil nil] [1 nil nil]] ((:get-board ((:open-cell (create board-view)) {:row 2 :col 0}))))
+		(should= [[nil nil nil] [nil nil nil] [nil -1 nil]] ((:get-board ((:open-cell (create board-view)) {:row 2 :col 1}))))
+		(should= [[nil nil nil] [nil nil nil] [nil nil 1]] ((:get-board ((:open-cell (create board-view)) {:row 2 :col 2}))))
 	)
 )
 
