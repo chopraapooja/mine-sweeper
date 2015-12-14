@@ -46,6 +46,11 @@
 		(should= [[nil nil nil] [nil nil nil] [nil -1 nil]] ((:get-board ((:open-cell (create-game board-view)) {:row 2 :col 1}))))
 		(should= [[nil nil nil] [nil nil nil] [nil nil 1]] ((:get-board ((:open-cell (create-game board-view)) {:row 2 :col 2}))))
 	)
+
+	(it "should not open-cell when game is over"
+		(should= [[-1 nil nil] [nil nil nil] [nil nil nil]]
+			((:get-board ((:open-cell (create-game board-view)) {:row 0 :col 0}))))
+	)
 )
 
 (describe "update-cell"
@@ -60,6 +65,13 @@
 )
 
 (describe "get-status"
+	(it "should tell game is not finished & not won"
+		(def game (create-game board-view))
+		(def game-status ((:get-status game)))
+		(should= false (:finished? game-status))
+		(should= false (:won? game-status))
+	)
+
 	(it "should tell game is over on opening bomb cell"
 		(def game (create-game board-view))
 		(def game ((:open-cell game) {:row 0 :col 0}))
