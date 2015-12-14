@@ -5,17 +5,14 @@
 (def board-view [ [nil nil nil] [nil nil nil] [nil nil nil] ])
 
 (describe "create"
-	(it "should give map"
-		(should= true (map? (create board-view)))
-	)
-
+	
 	(it "should map with get-board fn"
 		(should= true (fn? (:get-board (create board-view))))
 	)
 
-	(it "should map with get-board fn"
-		(should= true (fn? (:get-board (create board-view))))
-	)
+	; (it "should map with get-board fn"
+	; 	(should= true (fn? (:get-board (create board-view))))
+	; )
 )
 
 (describe "get-board"
