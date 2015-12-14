@@ -10,9 +10,13 @@
 		(should= true (fn? (:get-board (create-game board-view))))
 	)
 
-	; (it "should map with get-board fn"
-	; 	(should= true (fn? (:get-board (create-game board-view))))
-	; )
+	(it "should map with open-cell fn"
+		(should= true (fn? (:open-cell (create-game board-view))))
+	)
+
+	(it "should map with get-status fn"
+		(should= true (fn? (:get-status (create-game board-view))))
+	)
 )
 
 (describe "get-board"
