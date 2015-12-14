@@ -58,4 +58,46 @@
 
 )
 
+(describe "get-status"
+	(it "should tell game is over on opening bomb cell"
+		(def game (create board-view))
+		(def game ((:open-cell game) {:row 0 :col 0}))
+		(def game-status ((:get-status game)))
+		(should= true (:is-over game-status))
+	)
+)	
+
 (run-specs)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
