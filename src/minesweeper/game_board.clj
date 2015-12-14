@@ -1,12 +1,19 @@
 (ns minesweeper.game-board)
 
-(defn is-bomb? [board {:keys [row col] }]
-	(= -1 (nth (nth board row) col)))
+(defn cell-value [board {:keys [row col]}]
+	(nth (nth board row) col))
 
-(defn is-valid? [board {:keys [row col]}]
-	(if (and (<= 0 row) (> (count board) row) (<= 0 col) (> (count board) col)) true false))
+(defn is-bomb?
+	[board cell]
+	(= -1 (cell-value board cell)))
 
-(defn surrounding-cells [ {:keys [row col]} board]
+(defn is-valid?
+	[board {:keys [row col]}]
+	(let [total-rows (count board)]
+	(and (contains? (set (range total-rows)) row)
+		 (contains? (set (range total-rows)) col) )))
+
+(defn get-adjacent-cells [ {:keys [row col]} board]
 	(let [is-valid-partial? (partial is-valid? board)]
 		(set (filter is-valid-partial? [ 		
 				{:row (dec row) 	:col (dec col)}
@@ -20,9 +27,9 @@
 		]))))
 
 (defn open-cell [board {:keys [row col] :as cell}]
-	(let [ cell-value (nth (nth board row) col)
+	(let [ cell-value (cell-value board cell)
 			is-bomb-partial? (partial is-bomb? board)]
 		(if (neg? cell-value)
 			cell-value
-			(count (filter is-bomb-partial? (surrounding-cells cell board))))))
+			(count (filter is-bomb-partial? (get-adjacent-cells cell board))))))
 
