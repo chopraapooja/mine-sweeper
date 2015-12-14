@@ -54,37 +54,45 @@
 )
 
 (describe "get-status"
+	
 	(it "should tell game is not finished & not won"
-		(def game-status ((:get-status game)))
+		(let [game-status (get-status board-view)]
 		(should= false (:finished? game-status))
-		(should= false (:won? game-status))
+		(should= false (:won? game-status)))
 	)
 
 	(it "should tell game is over on opening bomb cell"
-		(def game ((:open-cell game) {:row 0 :col 0}))
-		(def game-status ((:get-status game)))
+		(let [
+				board-view (open-cell board-view {:row 0 :col 0})
+				game-status (get-status board-view)
+			]
 		(should= true (:finished? game-status))
-		(should= false (:won? game-status))
+		(should= false (:won? game-status)))
 	)
 
 	(it "should tell you won the game"
-		(def game ((:open-cell game) {:row 0 :col 1}))
-		(def game ((:open-cell game) {:row 0 :col 2}))
-		(def game ((:open-cell game) {:row 1 :col 0}))
-		(def game ((:open-cell game) {:row 1 :col 1}))
-		(def game ((:open-cell game) {:row 1 :col 2}))
-		(def game ((:open-cell game) {:row 2 :col 0}))
-		(def game ((:open-cell game) {:row 2 :col 2}))
-		(def game-status ((:get-status game)))
-		(should= true (:finished? game-status))
-		(should= true (:won? game-status))
+		(let [
+				board-view (open-cell board-view {:row 0 :col 1})
+				board-view (open-cell board-view {:row 0 :col 2})
+				board-view (open-cell board-view {:row 1 :col 0})
+				board-view (open-cell board-view {:row 1 :col 1})
+				board-view (open-cell board-view {:row 1 :col 2})
+				board-view (open-cell board-view {:row 2 :col 0})				
+				board-view (open-cell board-view {:row 2 :col 2})
+				game-status (get-status board-view)
+			]
+			(should= true (:finished? game-status))
+			(should= true (:won? game-status))
+		)
 	)
 
 	(it "should tell game is not finished in the middle of game"
-		(def game ((:open-cell game) {:row 0 :col 1}))
-		(def game-status ((:get-status game)))
+		(let [
+				board-view (open-cell board-view {:row 0 :col 1})
+				game-status (get-status board-view)
+			]
 		(should= false (:finished? game-status))
-		(should= false (:won? game-status))
+		(should= false (:won? game-status)))
 	)
 
 )
