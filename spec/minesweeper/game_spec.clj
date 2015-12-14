@@ -2,54 +2,42 @@
 	(:require [speclj.core :refer :all])
 	(:require [minesweeper.game :refer :all]))
 
-(def board-view [ [nil nil nil] [nil nil nil] [nil nil nil] ])
-
-(describe "create-game"
-	
-	(it "should map with get-board fn"
-		(should= true (fn? (:get-board (create-game board-view))))
-	)
-
-	(it "should map with open-cell fn"
-		(should= true (fn? (:open-cell (create-game board-view))))
-	)
-
-	(it "should map with get-status fn"
-		(should= true (fn? (:get-status (create-game board-view))))
-	)
-)
+(describe "game"
+	(before
+		(def board-view [ [nil nil nil] [nil nil nil] [nil nil nil] ])
+		(def game (create-game board-view)))
 
 (describe "get-board"
 	(it "should give initial status of game as all cells nil"
 		(should= 
 			[[nil nil nil] [nil nil nil] [nil nil nil]] 
-			((:get-board (create-game board-view))))
+			((:get-board game)))
 	)
 	(it "should give initial status of game as all cells nil"
 		(should= 
 			[[nil nil nil] [nil nil nil] [nil nil nil]] 
-			((:get-board (create-game board-view))))
+			((:get-board game)))
 	)
 )
 
 (describe "open-cell"
 	(it "opens cell at given location & returns new game"
-		(should= [[-1 nil nil] [nil nil nil] [nil nil nil]] ((:get-board ((:open-cell (create-game board-view)) {:row 0 :col 0}))))
-		(should= [[nil 1 nil] [nil nil nil] [nil nil nil]] ((:get-board ((:open-cell (create-game board-view)) {:row 0 :col 1}))))
-		(should= [[nil nil 0] [nil nil nil] [nil nil nil]] ((:get-board ((:open-cell (create-game board-view)) {:row 0 :col 2}))))
+		(should= [[-1 nil nil] [nil nil nil] [nil nil nil]] ((:get-board ((:open-cell game) {:row 0 :col 0}))))
+		(should= [[nil 1 nil] [nil nil nil] [nil nil nil]] ((:get-board ((:open-cell game) {:row 0 :col 1}))))
+		(should= [[nil nil 0] [nil nil nil] [nil nil nil]] ((:get-board ((:open-cell game) {:row 0 :col 2}))))
 
-		(should= [[nil nil nil] [2 nil nil] [nil nil nil]] ((:get-board ((:open-cell (create-game board-view)) {:row 1 :col 0}))))
-		(should= [[nil nil nil] [nil 2 nil] [nil nil nil]] ((:get-board ((:open-cell (create-game board-view)) {:row 1 :col 1}))))
-		(should= [[nil nil nil] [nil nil 1] [nil nil nil]] ((:get-board ((:open-cell (create-game board-view)) {:row 1 :col 2}))))
+		(should= [[nil nil nil] [2 nil nil] [nil nil nil]] ((:get-board ((:open-cell game) {:row 1 :col 0}))))
+		(should= [[nil nil nil] [nil 2 nil] [nil nil nil]] ((:get-board ((:open-cell game) {:row 1 :col 1}))))
+		(should= [[nil nil nil] [nil nil 1] [nil nil nil]] ((:get-board ((:open-cell game) {:row 1 :col 2}))))
 
-		(should= [[nil nil nil] [nil nil nil] [1 nil nil]] ((:get-board ((:open-cell (create-game board-view)) {:row 2 :col 0}))))
-		(should= [[nil nil nil] [nil nil nil] [nil -1 nil]] ((:get-board ((:open-cell (create-game board-view)) {:row 2 :col 1}))))
-		(should= [[nil nil nil] [nil nil nil] [nil nil 1]] ((:get-board ((:open-cell (create-game board-view)) {:row 2 :col 2}))))
+		(should= [[nil nil nil] [nil nil nil] [1 nil nil]] ((:get-board ((:open-cell game) {:row 2 :col 0}))))
+		(should= [[nil nil nil] [nil nil nil] [nil -1 nil]] ((:get-board ((:open-cell game) {:row 2 :col 1}))))
+		(should= [[nil nil nil] [nil nil nil] [nil nil 1]] ((:get-board ((:open-cell game) {:row 2 :col 2}))))
 	)
 
 	(it "should not open-cell when game is over"
 		(should= [[-1 nil nil] [nil nil nil] [nil nil nil]]
-			((:get-board ((:open-cell (create-game board-view)) {:row 0 :col 0}))))
+			((:get-board ((:open-cell game) {:row 0 :col 0}))))
 	)
 )
 
@@ -66,14 +54,12 @@
 
 (describe "get-status"
 	(it "should tell game is not finished & not won"
-		(def game (create-game board-view))
 		(def game-status ((:get-status game)))
 		(should= false (:finished? game-status))
 		(should= false (:won? game-status))
 	)
 
 	(it "should tell game is over on opening bomb cell"
-		(def game (create-game board-view))
 		(def game ((:open-cell game) {:row 0 :col 0}))
 		(def game-status ((:get-status game)))
 		(should= true (:finished? game-status))
@@ -81,7 +67,6 @@
 	)
 
 	(it "should tell you won the game"
-		(def game (create-game board-view))
 		(def game ((:open-cell game) {:row 0 :col 1}))
 		(def game ((:open-cell game) {:row 0 :col 2}))
 		(def game ((:open-cell game) {:row 1 :col 0}))
@@ -93,8 +78,8 @@
 		(should= true (:finished? game-status))
 		(should= true (:won? game-status))
 	)
-	(it "should tell game is not finished in the middle of game`"
-		(def game (create-game board-view))
+
+	(it "should tell game is not finished in the middle of game"
 		(def game ((:open-cell game) {:row 0 :col 1}))
 		(def game-status ((:get-status game)))
 		(should= false (:finished? game-status))
@@ -120,7 +105,7 @@
 
 	(it "should give true when all safe cells are opened"
 		(should= false (won? [[-1 nil 0] [2 2 1] [1 nil 1]]))))
-
+)
 (run-specs)
 
 
